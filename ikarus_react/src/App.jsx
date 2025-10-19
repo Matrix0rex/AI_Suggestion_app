@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// All CSS styles are now included directly in the component file.
 const GlobalStyles = () => (
   <style>{`
     /* --- General App Styling --- */
@@ -152,19 +151,18 @@ const GlobalStyles = () => (
 
 
 function App() {
-  // State to hold the user's search query
   const [query, setQuery] = useState('');
-  // State to store the results from the backend
+ 
   const [results, setResults] = useState([]);
-  // State to manage loading status
+  
   const [isLoading, setIsLoading] = useState(false);
-  // State for any potential errors
+  
   const [error, setError] = useState(null);
 
-  // --- HANDLER FUNCTIONS ---
+  
   const handleSearch = async (event) => {
-    event.preventDefault(); // Prevent the form from reloading the page
-    if (!query.trim()) return; // Don't search if the query is empty
+    event.preventDefault(); 
+    if (!query.trim()) return; 
 
     setIsLoading(true);
     setError(null);
@@ -174,11 +172,10 @@ function App() {
       
       const apiUrl = process.env.REACT_APP_API_URL;
 const response = await fetch(`${apiUrl}/api/recommend`, {
-  method: 'POST', // Specify the method is POST
+  method: 'POST', 
         headers: {
-          'Content-Type': 'application/json', // Tell the server we're sending JSON
+          'Content-Type': 'application/json', 
         },
-        // Send the data in the request body, matching the backend's expected format
         body: JSON.stringify({ prompt: query }),
       });
       
@@ -187,7 +184,6 @@ const response = await fetch(`${apiUrl}/api/recommend`, {
       }
 
       const data = await response.json();
-      // The backend returns an object like { recommendations: [...] }
       setResults(data.recommendations || []); 
 
     } catch (err) {
