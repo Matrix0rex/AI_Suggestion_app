@@ -172,8 +172,9 @@ function App() {
 
     try {
       
-      const response = await fetch('http://127.0.0.1:8000/api/recommend', {
-        method: 'POST', // Specify the method is POST
+      const apiUrl = process.env.REACT_APP_API_URL;
+const response = await fetch(`${apiUrl}/api/recommend`, {
+  method: 'POST', // Specify the method is POST
         headers: {
           'Content-Type': 'application/json', // Tell the server we're sending JSON
         },
